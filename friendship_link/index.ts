@@ -14,7 +14,7 @@ export function apply(ctx: Context) {
       "content": "111",
       "msg_type": 2,
       "keyboard": {
-        "id": "102076734_1721914596"
+        "id": ""
       },
       "msg_id": session.messageId,
       "timestamp": session.timestamp,
