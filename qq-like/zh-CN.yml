@@ -1,0 +1,6 @@
+commands:
+  qq-like:
+    messages:
+      a: <>{quote} 铃兰给你点了{n}个赞，快说谢谢铃兰。<img src="https://gitee.com/rain-linlin/galwife/raw/master/qqlike/1.jpg"/></>
+      b: <>{quote} 你是铃兰的好朋友，铃兰给你点了{n}个赞。<img src="https://gitee.com/rain-linlin/galwife/raw/master/qqlike/1.jpg"/></>
+      c: <>{quote} 铃兰露出疑惑的表情，或许她无法为你点赞了。<img src="https://gitee.com/rain-linlin/galwife/raw/master/qqlike/2.jpg"/></>
