@@ -9,31 +9,45 @@ export interface Config {}
 export const Config: Schema<Config> = Schema.object({})
 
 export function apply(ctx: Context) {
-  ctx.command('nyaa', '来只猫咪').alias('来只猫').alias('/来只猫').action(async ({ session }) => {
-    const apiURL = `https://api.thecatapi.com/v1/images/search?limit=1`;
-    try {
-      let response = await ctx.http.get(apiURL);
-      let [{id, url, width, height}] = response;
-      return `<>可爱的哈基米来啦，是不是很喜欢呢？\n<img src="${url}"/></>`;
+  ctx.command('来只小可爱 <animal:text>', '随机一张动物图片').alias('/来只小可爱').action(async ({ session }, animal) => {
+    const animals = ["猫猫","狗狗","狐狸"];
+    let inputanimal = animal == null ? animals[Math.floor(Math.random() * animals.length)] : animal;
+    const inputfox = ["狐狸","小狐狸","🦊","大狐狸","狐","狐狐","fox","Fox","哈基狐"];
+    const inputcat = ["猫","小猫","🐱","大猫猫","大猫","猫猫","cat","Cat","哈基米"];
+    const inputdog = ["狗","小狗","🐶","大狗狗","大狗","狗狗","dog","Dog","哈基旺","旺财"];
+    if (inputfox.includes(inputanimal)) {
+      try {
+        let number = Math.floor(Math.random() * 123) + 1;  
+        return `<><img src="https:\/\/randomfox.ca\/images\/${number}.jpg"/>\n毛茸茸的狐狸尾巴来咯~\n可选【🦊 🐱 🐶】</>`;
+      }
+      catch (e) {
+        return `<>呜，小狐狸逃进森林深处啦！</>`;
+      }
     }
-    catch (e) {
-      return `<>网络请求超时。/></>`;
+    if (inputcat.includes(inputanimal)) {
+      try {
+        const apiURL = `https://api.thecatapi.com/v1/images/search?limit=1`;
+        let response = await ctx.http.get(apiURL);
+        let [{id, url, width, height}] = response;
+        return `<><img src="${url}"/>\n猫猫的粉爪爪肉嘟嘟的~\n可选【🦊 🐱 🐶】</>`;
+      }
+      catch (e) {
+        return `<>呜，猫猫挺怕生，不敢出来。</>`;
+      }
     }
-  });
-  ctx.command('wanwan', '来只狗狗').alias('来只狗').alias('/来只狗').action(async ({ session }) => {
-    const apiURL = `https://api.thedogapi.com/v1/images/search?limit=1`;
-    try {
-      let response = await ctx.http.get(apiURL);
-      let [{id, url, width, height}] = response;
-      return `<>狗狗是人类的好朋友，是不是很可爱呢？\n<img src="${url}"/></>`;
+    if (inputdog.includes(inputanimal)) {
+      try {
+        const apiURL = `https://api.thedogapi.com/v1/images/search?limit=1`;
+        let response = await ctx.http.get(apiURL);
+        let [{id, url, width, height}] = response;
+        return `<><img src="${url}"/>\n狗狗是人类的好朋友~\n可选【🦊 🐱 🐶】</>`;
+      }
+      catch (e) {
+        return `<>呜，狗狗好像在忙的样子~</>`;
+      }
     }
-    catch (e) {
-      return `<>网络请求超时。/></>`;
+    if ((!(inputfox.includes(inputanimal))) || (!(inputcat.includes(inputanimal))) || (!(inputdog.includes(inputanimal)))) {
+      return `<>呜，糖云没有这种动物的图片，请检查输入是否有误。可选【🦊 🐱 🐶】</>`;
     }
-  });
-
-  ctx.command('huli', '来只狐狸').alias('来只狐狸').alias('/来只狐狸').alias('/来只狐').alias('来只狐').action(async ({ session }) => {
-    let shuzi = Math.floor(Math.random() * 123) + 1;  
-    return `<>（看不到图片说明上传超时）\n狐狸的大尾巴很柔软呢，是不是很可爱呢？<img src="https:\/\/randomfox.ca\/images\/${shuzi}.jpg"/></>`;
   });
 }
